@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +16,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 217 91% 60%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -35,19 +38,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -97,5 +93,39 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .product-card {
+    @apply bg-white rounded-lg border border-border overflow-hidden transition-all duration-300 hover:shadow-lg;
+  }
+  
+  .product-card-image {
+    @apply aspect-square object-cover w-full transition-all duration-300;
+  }
+  
+  .product-card:hover .product-card-image {
+    @apply scale-105;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:opacity-90 transition-opacity rounded-md px-4 py-2;
+  }
+  
+  .btn-outline {
+    @apply border border-primary text-primary hover:bg-primary/10 transition-colors rounded-md px-4 py-2;
+  }
+  
+  .search-overlay {
+    @apply fixed inset-0 bg-black/40 backdrop-blur-sm z-40;
+  }
+  
+  .cart-overlay {
+    @apply fixed inset-0 bg-black/40 backdrop-blur-sm z-40;
+  }
+  
+  .cart-drawer {
+    @apply fixed top-0 right-0 w-full max-w-md h-full bg-background shadow-xl z-50 overflow-auto;
   }
 }
