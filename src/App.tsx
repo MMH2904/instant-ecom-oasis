@@ -10,6 +10,8 @@ import ProductDetail from "./pages/ProductDetail";
 import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import NotFound from "./pages/NotFound";
+import NewArrivals from "./pages/NewArrivals";
+import Trending from "./pages/Trending";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,8 @@ const App = () => (
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
+          <Route path="/new-arrivals" element={<NewArrivals />} />
+          <Route path="/trending" element={<Trending />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

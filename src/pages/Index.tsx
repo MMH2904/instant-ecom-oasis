@@ -25,6 +25,9 @@ export default function Index() {
               src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1470" 
               alt="Hero" 
               className="w-full h-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://via.placeholder.com/1800x1200?text=ShopOasis';
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/20"></div>
           </div>
@@ -41,8 +44,8 @@ export default function Index() {
                 <Button size="lg" asChild>
                   <Link to="/products">Shop Now</Link>
                 </Button>
-                <Button variant="outline" size="lg" className="bg-white/10 text-white border-white/30 hover:bg-white/20">
-                  Explore Collections
+                <Button variant="outline" size="lg" className="bg-white/10 text-white border-white/30 hover:bg-white/20" asChild>
+                  <Link to="/new-arrivals">Explore Collections</Link>
                 </Button>
               </div>
             </div>
@@ -55,71 +58,71 @@ export default function Index() {
             <h2 className="text-3xl font-bold text-center mb-12">Shop by Category</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="relative h-64 rounded-lg overflow-hidden group">
+              <Link to="/products?category=Electronics" className="block relative h-64 rounded-lg overflow-hidden group">
                 <img 
                   src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=989" 
                   alt="Electronics" 
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://via.placeholder.com/600x400?text=Electronics';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
                   <div>
                     <h3 className="text-xl font-bold text-white mb-2">Electronics</h3>
-                    <Link 
-                      to="/products?category=Electronics" 
-                      className="text-white/90 hover:text-white inline-flex items-center"
-                    >
+                    <span className="text-white/90 hover:text-white inline-flex items-center">
                       Shop Now
                       <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                       </svg>
-                    </Link>
+                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
               
-              <div className="relative h-64 rounded-lg overflow-hidden group">
+              <Link to="/products?category=Home" className="block relative h-64 rounded-lg overflow-hidden group">
                 <img 
                   src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=870" 
                   alt="Home" 
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://via.placeholder.com/600x400?text=Home';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
                   <div>
                     <h3 className="text-xl font-bold text-white mb-2">Home</h3>
-                    <Link 
-                      to="/products?category=Home" 
-                      className="text-white/90 hover:text-white inline-flex items-center"
-                    >
+                    <span className="text-white/90 hover:text-white inline-flex items-center">
                       Shop Now
                       <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                       </svg>
-                    </Link>
+                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
               
-              <div className="relative h-64 rounded-lg overflow-hidden group">
+              <Link to="/products?category=Clothing" className="block relative h-64 rounded-lg overflow-hidden group">
                 <img 
                   src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=870" 
                   alt="Clothing" 
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://via.placeholder.com/600x400?text=Clothing';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
                   <div>
                     <h3 className="text-xl font-bold text-white mb-2">Clothing</h3>
-                    <Link 
-                      to="/products?category=Clothing" 
-                      className="text-white/90 hover:text-white inline-flex items-center"
-                    >
+                    <span className="text-white/90 hover:text-white inline-flex items-center">
                       Shop Now
                       <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                       </svg>
-                    </Link>
+                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </section>
@@ -149,14 +152,26 @@ export default function Index() {
         {/* New Arrivals */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <ProductCarousel title="New Arrivals" products={newArrivals} />
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-2xl font-bold">New Arrivals</h2>
+              <Button variant="outline" asChild>
+                <Link to="/new-arrivals">View All</Link>
+              </Button>
+            </div>
+            <ProductCarousel products={newArrivals} />
           </div>
         </section>
         
         {/* Trending Products */}
         <section className="py-16 bg-muted">
           <div className="container mx-auto px-4">
-            <ProductCarousel title="Trending Now" products={trendingProducts} />
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-2xl font-bold">Trending Now</h2>
+              <Button variant="outline" asChild>
+                <Link to="/trending">View All</Link>
+              </Button>
+            </div>
+            <ProductCarousel products={trendingProducts} />
           </div>
         </section>
         

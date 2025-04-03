@@ -4,6 +4,7 @@ import { Product } from '@/data/products';
 import { Button } from '@/components/ui/button';
 import { ShoppingCart, Heart } from 'lucide-react';
 import { useCart } from '@/hooks/use-cart';
+import { useState } from 'react';
 
 interface ProductCardProps {
   product: Product;
@@ -11,6 +12,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart();
+  const [imageError, setImageError] = useState(false);
   
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -18,14 +20,19 @@ export function ProductCard({ product }: ProductCardProps) {
     addItem(product, 1);
   };
   
+  const handleImageError = () => {
+    setImageError(true);
+  };
+  
   return (
     <div className="product-card group">
       <Link to={`/product/${product.id}`} className="block">
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden aspect-square rounded-md">
           <img 
-            src={product.images[0]} 
+            src={imageError ? 'https://via.placeholder.com/300?text=Product+Image' : product.images[0]} 
             alt={product.name} 
-            className="product-card-image"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            onError={handleImageError}
           />
           
           {product.stock < 5 && product.stock > 0 && (
